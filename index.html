@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./src/favicon.png" type="image/x-icon">
+    <title>Profile Robot</title>
+</head>
+
+<body>
+    <div class="card">
+        <div>
+            <form id="form">
+                <p class="title">Gere sua imagem de perfil a partir de qualquer texto!</p>
+                <label for="base_text">Texto a ser usado como base:</label>
+                <input id="base_text" type="text" required autofocus>
+
+                <div class="style-select-div">
+                    <label for="sets">Estilo:</label>
+                    <select id="sets">
+                        <option value="set1" selected>Robos</option>
+                        <option value="set2">Aliens</option>
+                        <option value="set3">Robos (Cabeças)</option>
+                        <option value="set4">Gatos</option>
+                        <option value="set5">Humanos</option>
+                    </select>
+                </div>
+
+                <div class="background-checkbox-div">
+                    <input id="background" name="background" type="checkbox" value="&bgset=any">
+                    <label for="background">Adicionar plano de fundo aleatório</label>
+                </div>
+
+                <button type="submit">Gerar imagem</button>
+            </form>
+        </div>
+        <div class="profile-div">
+            <img id="profile_pic" class="profile-pic" src="#" draggable="false">
+            <a download="profile_picture.jpg" href="#" title="Profile Picture" id="download_image"
+                class="download-btn">Salvar imagem</a>
+        </div>
+    </div>
+</body>
+<script src="./src/jquery-3.6.1.min.js"></script>
+<script>
+    //Gera uma imagem aleatória de ao abrir a página 
+    window.onload = () => {
+
+        let randomProfile = '';
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        for (let i = 0; i < 10; i++) {
+            randomProfile += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+
+        let link = `https://robohash.org/${randomProfile}?set=set${parseInt(Math.random() * 6)}&bgset=any`;
+
+        $('#profile_pic').attr('src', link);
+        $('#download_image').attr('href', link);
+    };
+
+    //Gerar uma nova imagem de acordo com o input do usuário
+    $("#form").submit((event) => {
+        event.preventDefault();
+        const baseText = $('#base_text').val();
+        const set = $('#sets').val();
+        let background = $('#background').prop("checked") ? $('#background').val(): "";
+
+        $('#profile_pic').attr('src', `https://robohash.org/${baseText}?set=${set}${background}`);
+        $('#download_image').attr('href', `https://robohash.org/${baseText}?set=${set}${background}`);
+    });
+
+    // //Creating dynamic link that automatically click
+    // function downloadURI(uri, name) {
+    //     var link = document.createElement("a");
+    //     link.download = name;
+    //     link.href = uri;
+    //     link.click();
+    //     //after creating link you should delete dynamic link
+    //     //clearDynamicLink(link);
+    // }
+
+    // //Your modified code.
+    // function printToFile(div) {
+    //     html2canvas(div, {
+    //         onrendered: function (canvas) {
+    //             var myImage = canvas.toDataURL("image/png");
+    //             //create your own dialog with warning before saving file
+    //             //beforeDownloadReadMessage();
+    //             //Then download file
+    //             downloadURI("data:" + myImage, "yourImage.png");
+    //         }
+    //     });
+    // }
+</script>
+
+</html>

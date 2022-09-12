@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'robots';
+    src: url('./VoiceActivatedBB_reg.otf');
+}
+@font-face {
+    font-family: 'robots';
+    src: url('./VoiceActivatedBB_ital.otf');
+    font-style: italic;
+}
+@font-face {
+    font-family: 'robots';
+    src: url('./VoiceActivatedBB_bold.otf');
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'robots';
+    src: url('./VoiceActivatedBB_boldital.otf');
+    font-weight: bold;
+    font-style: italic;
+}
