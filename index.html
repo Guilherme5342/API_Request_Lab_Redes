@@ -39,8 +39,7 @@
         </div>
         <div class="profile-div">
             <img id="profile_pic" class="profile-pic" src="#" draggable="false">
-            <a download="profile_picture.jpg" href="#" title="Profile Picture" id="download_image"
-                class="download-btn">Salvar imagem</a>
+            <button class="download-btn" onclick="downloadFile()">Salvar imagem</button>
         </div>
     </div>
 </body>
@@ -48,7 +47,6 @@
 <script>
     //Gera uma imagem aleatória de ao abrir a página 
     window.onload = () => {
-
         let randomProfile = '';
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         for (let i = 0; i < 10; i++) {
@@ -56,9 +54,27 @@
         }
 
         let link = `https://robohash.org/${randomProfile}?set=set${parseInt(Math.random() * 6)}&bgset=any`;
-
         $('#profile_pic').attr('src', link);
-        $('#download_image').attr('href', link);
+    };
+
+    //Faz uma request para salvar a imagem e salva no disco do usuário
+    const downloadFile = async () => {
+        const reader = new FileReader();
+
+        fetch($('#profile_pic').prop("src"))
+            .then((res) => res.blob())
+            .then((blob) => {
+                reader.readAsDataURL(blob);
+                reader.onloadend = () => {
+                    const base64data = reader.result;
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = base64data;
+                    downloadLink.download = 'profile picture.png';
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                }
+            })
+            .catch((err) => console.log(err));
     };
 
     //Gerar uma nova imagem de acordo com o input do usuário
@@ -66,34 +82,11 @@
         event.preventDefault();
         const baseText = $('#base_text').val();
         const set = $('#sets').val();
-        let background = $('#background').prop("checked") ? $('#background').val(): "";
+        let background = $('#background').prop("checked") ? $('#background').val() : "";
 
         $('#profile_pic').attr('src', `https://robohash.org/${baseText}?set=${set}${background}`);
-        $('#download_image').attr('href', `https://robohash.org/${baseText}?set=${set}${background}`);
     });
 
-    // //Creating dynamic link that automatically click
-    // function downloadURI(uri, name) {
-    //     var link = document.createElement("a");
-    //     link.download = name;
-    //     link.href = uri;
-    //     link.click();
-    //     //after creating link you should delete dynamic link
-    //     //clearDynamicLink(link);
-    // }
-
-    // //Your modified code.
-    // function printToFile(div) {
-    //     html2canvas(div, {
-    //         onrendered: function (canvas) {
-    //             var myImage = canvas.toDataURL("image/png");
-    //             //create your own dialog with warning before saving file
-    //             //beforeDownloadReadMessage();
-    //             //Then download file
-    //             downloadURI("data:" + myImage, "yourImage.png");
-    //         }
-    //     });
-    // }
 </script>
 
 </html>

@@ -107,18 +107,21 @@ form>button {
 }
 
 .download-btn {
+    margin-top: 10px;
     background-color: #5f1e00;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    width: 150px;
     height: 2rem;
-    font-family: 'robots';
-    text-decoration: none;
     color: white;
-    width: 180px;
-    border-radius: 5px;
-    margin-top: 15px;
     align-self: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 5px;
+    font-family: 'robots';
+}
+
+button:hover {
+    background-color: #6b3318;
 }
 
 @media screen and (max-width:720px) {
