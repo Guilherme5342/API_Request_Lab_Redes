@@ -3,8 +3,8 @@
 * {
     margin: 0;
     padding: 0;
-    --fundo: #0a0a0a;
-    --secundaria: #120646;
+    --fundo: #0c0c0c;
+    --secundaria: #6349D8;
 }
 
 body {
@@ -81,7 +81,7 @@ form>input[type=text] {
 
 form>button {
     margin-top: 30px;
-    background-color: #5f1e00;
+    background-color: #0c0c0c;
     border: none;
     outline: none;
     cursor: pointer;
@@ -108,7 +108,7 @@ form>button {
 
 .download-btn {
     margin-top: 10px;
-    background-color: #5f1e00;
+    background-color: #1CA700;
     border: none;
     outline: none;
     cursor: pointer;
@@ -121,7 +121,7 @@ form>button {
 }
 
 button:hover {
-    background-color: #6b3318;
+    background-color: #278a13;
 }
 
 @media screen and (max-width:720px) {
